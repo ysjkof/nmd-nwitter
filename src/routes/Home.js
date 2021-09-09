@@ -1,23 +1,31 @@
-import { addDoc, collection, getDocs } from "@firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getFirestore,
+  onSnapshot,
+  orderBy,
+  query,
+} from "@firebase/firestore";
 import { useEffect, useState } from "react";
 import { dbService } from "../fbase";
 
-const Home = () => {
+const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
-  const getNweets = async () => {
-    const dbNweets = await getDocs(collection(dbService, "nweets"));
-    dbNweets.forEach((document) => {
-      const nweetObject = {
-        ...document.data(),
-        id: document.id,
-      };
-      setNweets((prev) => [nweetObject, ...prev]);
-    });
-  };
+  console.log(userObj);
   //   한 번만 실행하고 파이어베이스의 데이터로 트윗을 업데이트한다.
   useEffect(() => {
-    getNweets();
+    const q = query(collection(getFirestore(), "nweets"), orderBy("createdAt"));
+    const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
+      const newArray = QuerySnapshot.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() };
+      });
+      setNweets(newArray);
+      console.log("Current Nweets in CA: ", newArray);
+    });
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const onSubmit = async (event) => {
@@ -26,6 +34,7 @@ const Home = () => {
       const docRef = await addDoc(collection(dbService, "nweets"), {
         text: nweet,
         createdAt: Date.now(),
+        creatorId: userObj.uid,
       });
       console.log("Document written with ID: ", docRef);
     } catch (error) {
@@ -57,7 +66,7 @@ const Home = () => {
       <div>
         {nweets.map((nweet) => (
           <div key={nweet.id}>
-            <h4>{nweet.nweet}</h4>
+            <h4>{nweet.text}</h4>
           </div>
         ))}
       </div>
