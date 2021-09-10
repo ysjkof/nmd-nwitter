@@ -13,6 +13,7 @@ function App() {
         setUserObject(user);
       } else {
         setIsLoggedIn(false);
+        setUserObject(null);
       }
       setInit(true);
     });
