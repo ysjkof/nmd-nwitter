@@ -15,7 +15,7 @@ import { dbService, storageService } from "../fbase";
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState("");
 
   useEffect(() => {
     const q = query(collection(getFirestore(), "nweets"), orderBy("createdAt"));
@@ -34,7 +34,7 @@ const Home = ({ userObj }) => {
     event.preventDefault();
     try {
       let attachmentUrl = "";
-      if (attachment != "") {
+      if (attachment !== "") {
         const attachmentRef = ref(storageService, `${userObj.uid}/${v4()}`);
         const response = await uploadString(
           attachmentRef,
