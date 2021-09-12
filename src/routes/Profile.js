@@ -1,17 +1,54 @@
 import { updateProfile } from "@firebase/auth";
 import { collection, getDocs, query, where } from "@firebase/firestore";
 import { useEffect } from "react";
-import { useHistory } from "react-router";
 import { useState } from "react/cjs/react.development";
-import { authService, dbService } from "../fbase";
+import styled from "styled-components";
+import Nweet from "../components/Nweet";
+import { dbService } from "../fbase";
+
+const Container = styled.div`
+  height: 100%;
+  min-height: 82vh;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 5px;
+  form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    div {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      input {
+        width: 50%;
+      }
+    }
+    label {
+      margin-right: 10px;
+    }
+    input:not(:last-child) {
+      border: none;
+      box-shadow: 0 0 4px;
+      padding: 0 7px;
+    }
+  }
+`;
+const MyNweet = styled.div`
+  display: flex;
+  flex-direction: column;
+  h5 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+`;
 
 const Profile = ({ userObj, refreshUser }) => {
-  const history = useHistory();
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
-  const onLogOutClick = () => {
-    authService.signOut();
-    history.push("/");
-  };
+  const [myNweets, setMyNweets] = useState();
+
   const onChange = (event) => {
     const {
       target: { value },
@@ -31,28 +68,43 @@ const Profile = ({ userObj, refreshUser }) => {
       collection(dbService, "nweets"),
       where("creatorId", "==", userObj.uid)
     );
+
     const querySnapshot = await getDocs(q);
+    let newArray = [];
     querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
+      return newArray.push(doc.data());
     });
+    setMyNweets(newArray);
   };
   useEffect(() => {
     getMyNweets();
-  });
+  }, []);
 
   return (
-    <>
+    <Container>
       <form onSubmit={onSubmit}>
-        <input
-          onChange={onChange}
-          type="text"
-          placeholder="Display name"
-          value={newDisplayName}
-        />
-        <input type="submit" value="Update Profile" />
+        <label>Nickname</label>
+        <div>
+          <input
+            onChange={onChange}
+            type="text"
+            placeholder="Display name"
+            value={newDisplayName}
+          />
+          <input type="submit" value="Update Profile" />
+        </div>
       </form>
-      <button onClick={onLogOutClick}>Log out</button>
-    </>
+      <MyNweet>
+        <h5>My Nweets</h5>
+        {myNweets?.map((nweet) => (
+          <Nweet
+            key={nweet.createdAt}
+            nweetObj={nweet}
+            isOwner={nweet.creatorId === userObj.uid}
+          />
+        ))}
+      </MyNweet>
+    </Container>
   );
 };
 

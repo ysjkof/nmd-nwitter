@@ -3,8 +3,27 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "@firebase/auth";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
+import styled from "styled-components";
 import AuthForm from "../components/AuthForm";
 import { authService } from "../fbase";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const AnotherAuthForm = styled.div`
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  button {
+    width: 40%;
+  }
+`;
 
 const Auth = () => {
   const onSocialClick = async (event) => {
@@ -30,17 +49,19 @@ const Auth = () => {
   };
 
   return (
-    <div>
+    <Container>
       <AuthForm />
-      <div>
+      <AnotherAuthForm>
         <button name="google" onClick={onSocialClick}>
-          Continue with Google
+          Sign In with Google
+          <FontAwesomeIcon icon={faGoogle} />
         </button>
         <button name="github" onClick={onSocialClick}>
-          Continue with GitHub
+          Sign In GitHub
+          <FontAwesomeIcon icon={faGithub} />
         </button>
-      </div>
-    </div>
+      </AnotherAuthForm>
+    </Container>
   );
 };
 
