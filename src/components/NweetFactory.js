@@ -2,7 +2,7 @@ import { addDoc, collection } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import styled from "styled-components";
 import { v4 } from "uuid";
 import { dbService, storageService } from "../fbase";
