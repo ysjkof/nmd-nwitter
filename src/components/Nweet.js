@@ -73,7 +73,6 @@ const Nweet = ({ nweetObj, isOwner }) => {
     } = event;
     setNewNweet(value);
   };
-  console.log(isOwner);
 
   return (
     <Wrapper isOwner={isOwner}>

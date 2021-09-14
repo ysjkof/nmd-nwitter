@@ -1,7 +1,6 @@
 import { updateProfile } from "@firebase/auth";
 import { collection, getDocs, query, where } from "@firebase/firestore";
-import { useEffect } from "react";
-import { useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Nweet from "../components/Nweet";
 import { dbService } from "../fbase";
