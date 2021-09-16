@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import styled from "styled-components";
 import { storageService } from "../fbase";
+import { transCreatedAt } from "./sharedFn";
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,18 +29,30 @@ const NweetRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   color: #34495e;
-  img {
-    max-width: 30%;
+  a img {
+    border-radius: 8px;
+    margin-top: 4px;
+    max-width: 100%;
   }
   :first-child {
     font-size: 14px;
     color: #7f8c8d;
   }
+  h6 {
+    word-break: break-all;
+  }
 `;
 const BtnWrapper = styled.div`
   span:last-child {
-    margin-left: 25px;
+    margin-left: 18px;
+  }
+`;
+const BtnDateColumn = styled.div`
+  display: flex;
+  h5 {
+    margin-left: 10px;
   }
 `;
 
@@ -94,24 +107,35 @@ const Nweet = ({ nweetObj, isOwner }) => {
         <>
           <NweetContainer>
             <NweetRow>
-              <h6>{nweetObj.displayName}</h6>
-              {isOwner && (
-                <BtnWrapper>
-                  <span onClick={onDeleteClick}>
-                    <FontAwesomeIcon icon={faTrash} />
-                  </span>
-                  <span onClick={toggleEditing}>
-                    <FontAwesomeIcon icon={faPencilAlt} />
-                  </span>
-                </BtnWrapper>
-              )}
+              <h4>{nweetObj.displayName}</h4>
+              <BtnDateColumn>
+                {isOwner && (
+                  <BtnWrapper>
+                    <span onClick={onDeleteClick}>
+                      <FontAwesomeIcon icon={faTrash} />
+                    </span>
+                    <span onClick={toggleEditing}>
+                      <FontAwesomeIcon icon={faPencilAlt} />
+                    </span>
+                  </BtnWrapper>
+                )}
+                <h5>{transCreatedAt(nweetObj.createdAt)}</h5>
+              </BtnDateColumn>
             </NweetRow>
             <NweetRow>
-              <h4>{nweetObj.text}</h4>
-              {nweetObj.attachmentUrl && (
-                <img alt="" src={nweetObj.attachmentUrl} />
-              )}
+              <h6>{nweetObj.text}</h6>
             </NweetRow>
+            {nweetObj.attachmentUrl && (
+              <NweetRow>
+                <a href={nweetObj.attachmentUrl}>
+                  <img
+                    id={nweetObj.attachmentUrl}
+                    alt=""
+                    src={nweetObj.attachmentUrl}
+                  />
+                </a>
+              </NweetRow>
+            )}
           </NweetContainer>
         </>
       )}

@@ -7,10 +7,11 @@ import { dbService } from "../fbase";
 
 const Container = styled.div`
   height: 100%;
-  min-height: 82vh;
+  min-height: 50vh;
   border: 1px solid;
   border-radius: 8px;
-  padding: 5px;
+  padding: 5px 5px 20px 5px;
+
   form {
     display: flex;
     justify-content: space-between;
@@ -77,6 +78,7 @@ const Profile = ({ userObj, refreshUser }) => {
   };
   useEffect(() => {
     getMyNweets();
+    // eslint-disable-next-line
   }, []);
 
   return (

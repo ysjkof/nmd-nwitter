@@ -6,9 +6,9 @@ import { authService } from "../fbase";
 const Nav = styled.nav`
   display: flex;
   background-color: white;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px auto;
   width: 100%;
+  max-width: 640px;
   border-radius: 8px;
 `;
 const Ul = styled.ul`

@@ -9,10 +9,16 @@ import { dbService, storageService } from "../fbase";
 
 const Form = styled.form`
   width: 100%;
+  max-width: 640px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: fixed;
+  bottom: -5px;
+  background-color: white;
+  border-radius: 8px;
   input {
+    box-shadow: 0 0 5px purple;
     margin-bottom: 5px;
     padding: 0 10px;
     :first-child {
@@ -125,7 +131,7 @@ const NweetFactory = ({ userObj }) => {
         onChange={onChange}
         type="text"
         placeholder="What's on your mind?"
-        maxLength={123}
+        maxLength={500}
       />
       <label htmlFor="attach-file" className="factoryInput__label">
         <div>
