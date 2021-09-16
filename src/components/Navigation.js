@@ -5,7 +5,7 @@ import { authService } from "../fbase";
 
 const Nav = styled.nav`
   display: flex;
-  background-color: white;
+  background-color: none;
   margin: 10px auto;
   width: 100%;
   max-width: 640px;
@@ -18,6 +18,7 @@ const Ul = styled.ul`
   width: 100%;
   a,
   button {
+    background-color: white;
     border: 1px solid;
     border-radius: 8px;
     padding: 4px 8px;

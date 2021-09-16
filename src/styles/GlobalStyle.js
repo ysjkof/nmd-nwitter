@@ -14,7 +14,7 @@ ${reset}
 }
 body{
     font-family: 'GowunDodum-Regular';
-    /* background-color: #bdc3c7; */
+    background-color: rgba(0,0,0,0.9);
 }
 input, button{
     border:solid 1px;

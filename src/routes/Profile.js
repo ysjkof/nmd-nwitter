@@ -7,26 +7,34 @@ import { dbService } from "../fbase";
 
 const Container = styled.div`
   height: 100%;
+  max-width: 640px;
   min-height: 50vh;
-  border: 1px solid;
+  /* border: 1px solid; */
   border-radius: 8px;
   padding: 5px 5px 20px 5px;
-
+  margin: auto;
   form {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 45px;
     div {
       display: flex;
       justify-content: space-between;
       gap: 20px;
-      input {
+      width: 100%;
+      input:first-child {
         width: 50%;
+      }
+      input:last-child {
+        width: 30%;
       }
     }
     label {
       margin-right: 10px;
+      background-color: white;
+      border-radius: 8px;
+      padding: 3px 8px;
     }
     input:not(:last-child) {
       border: none;
@@ -38,10 +46,12 @@ const Container = styled.div`
 const MyNweet = styled.div`
   display: flex;
   flex-direction: column;
-  h5 {
-    width: 100%;
+  h3 {
     text-align: center;
     margin-bottom: 18px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 6px;
   }
 `;
 
@@ -89,14 +99,14 @@ const Profile = ({ userObj, refreshUser }) => {
           <input
             onChange={onChange}
             type="text"
-            placeholder="Display name"
+            placeholder="Nickname"
             value={newDisplayName}
           />
           <input type="submit" value="Update Profile" />
         </div>
       </form>
       <MyNweet>
-        <h5>My Nweets</h5>
+        <h3>My Nweets</h3>
         {myNweets?.map((nweet) => (
           <Nweet
             key={nweet.createdAt}

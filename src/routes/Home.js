@@ -14,16 +14,15 @@ const OutWindow = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-  border: 1px solid;
+  /* border: 1px solid; */
   padding: 10px;
   border-radius: 8px;
   height: 100%;
   width: 100%;
-  overflow-y: auto;
   &:first-child {
     margin-top: auto;
   }
-  padding-bottom: 80px;
+  padding-bottom: 90px;
 `;
 
 const Home = ({ userObj }) => {

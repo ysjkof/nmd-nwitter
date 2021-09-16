@@ -14,6 +14,9 @@ const Wrapper = styled.div`
   background-color: white;
   border-radius: 8px;
   padding: 4px 8px;
+  :hover {
+    background-color: rgb(255, 191, 191);
+  }
   :not(:last-child) {
     margin-bottom: 14px;
   }
@@ -45,6 +48,12 @@ const NweetRow = styled.div`
   }
 `;
 const BtnWrapper = styled.div`
+  span {
+    cursor: pointer;
+  }
+  span :hover {
+    scale: 1.3;
+  }
   span:last-child {
     margin-left: 18px;
   }

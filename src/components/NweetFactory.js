@@ -12,13 +12,17 @@ const Form = styled.form`
   max-width: 640px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: fixed;
-  bottom: -5px;
-  background-color: white;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.85);
   border-radius: 8px;
+  margin-bottom: 30px;
+
+  /* padding: 0px 20px 0px 20px; */
+  /* padding: 0 10px; */
   input {
-    box-shadow: 0 0 5px purple;
+    background: none;
+    box-shadow: 0 0 5px;
     margin-bottom: 5px;
     padding: 0 10px;
     :first-child {
@@ -41,7 +45,8 @@ const PreviewAttachment = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 20%;
+  top: -50vh;
+  left: 1px;
   box-shadow: 0 0 10px;
   img {
     max-width: 350px;
