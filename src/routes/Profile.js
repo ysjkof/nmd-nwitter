@@ -23,11 +23,19 @@ const Container = styled.div`
       justify-content: space-between;
       gap: 20px;
       width: 100%;
+      input {
+      }
       input:first-child {
+        background-color: rgba(249, 255, 173, 0.95);
         width: 50%;
       }
       input:last-child {
         width: 30%;
+        cursor: pointer;
+        background-color: yellow;
+        :hover {
+          scale: 1.2;
+        }
       }
     }
     label {

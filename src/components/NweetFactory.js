@@ -14,12 +14,9 @@ const Form = styled.form`
   flex-direction: column;
   position: fixed;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(249, 255, 173, 0.95);
   border-radius: 8px;
   margin-bottom: 30px;
-
-  /* padding: 0px 20px 0px 20px; */
-  /* padding: 0 10px; */
   input {
     background: none;
     box-shadow: 0 0 5px;
@@ -28,6 +25,12 @@ const Form = styled.form`
     :first-child {
       width: 100%;
       padding: 10px;
+    }
+    :last-child {
+      background-color: yellow;
+      :hover {
+        scale: 1.2;
+      }
     }
   }
   label {
@@ -38,6 +41,27 @@ const Form = styled.form`
     margin-bottom: 5px;
     span {
       margin-right: 10px;
+    }
+    div {
+      :hover {
+        scale: 1.2;
+      }
+      cursor: pointer;
+      border: 1px solid;
+      border-radius: 8px;
+      padding: 0 10px;
+      background-color: yellow;
+    }
+    div svg {
+      animation: rotationX 2s ease infinite;
+      @keyframes rotationX {
+        from {
+          transform: rotateY(0deg);
+        }
+        to {
+          transform: rotateY(180deg);
+        }
+      }
     }
   }
 `;
@@ -63,6 +87,7 @@ const PreviewAttachment = styled.div`
     top: 10px;
     left: 10px;
     border: 1px solid red;
+    background-color: rgba(249, 255, 173, 0.7);
     color: red;
   }
   button {
@@ -72,6 +97,7 @@ const PreviewAttachment = styled.div`
     color: red;
     font-weight: 600;
     border: 1px solid red;
+    background-color: yellow;
   }
 `;
 
@@ -81,6 +107,9 @@ const NweetFactory = ({ userObj }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    if (nweet.length === 0) {
+      return null;
+    }
     try {
       let attachmentUrl = "";
       if (attachment !== "") {
@@ -135,7 +164,7 @@ const NweetFactory = ({ userObj }) => {
         value={nweet}
         onChange={onChange}
         type="text"
-        placeholder="What's on your mind?"
+        placeholder=". . ."
         maxLength={500}
       />
       <label htmlFor="attach-file" className="factoryInput__label">
@@ -156,7 +185,7 @@ const NweetFactory = ({ userObj }) => {
         <PreviewAttachment>
           <span>Attached Image</span>
           <img alt="" src={attachment} />
-          <button onClick={onClearAttachment}>Clear</button>
+          <button onClick={onClearAttachment}>Cancel</button>
         </PreviewAttachment>
       ) : null}
     </Form>

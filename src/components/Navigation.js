@@ -10,6 +10,7 @@ const Nav = styled.nav`
   width: 100%;
   max-width: 640px;
   border-radius: 8px;
+  padding: 0 8px;
 `;
 const Ul = styled.ul`
   display: flex;
@@ -18,7 +19,7 @@ const Ul = styled.ul`
   width: 100%;
   a,
   button {
-    background-color: white;
+    background-color: yellow;
     border: 1px solid;
     border-radius: 8px;
     padding: 4px 8px;

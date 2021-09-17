@@ -11,7 +11,8 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: ${(props) =>
+    props.isOwner ? "rgb(255, 255, 210)" : "white"};
   border-radius: 8px;
   padding: 4px 8px;
   :hover {
@@ -20,7 +21,9 @@ const Wrapper = styled.div`
   :not(:last-child) {
     margin-bottom: 14px;
   }
-  box-shadow: ${(props) => (props.isOwner ? "0 0 3px 1px" : "0 0 1px")};
+  button {
+    background-color: yellow;
+  }
 `;
 
 const NweetContainer = styled.div`
@@ -64,6 +67,19 @@ const BtnDateColumn = styled.div`
     margin-left: 10px;
   }
 `;
+const EditForm = styled.form`
+  width: 100%;
+  padding-right: 20px;
+  input {
+    :first-child {
+      width: 85%;
+    }
+    :last-child {
+      width: 15%;
+      background-color: yellow;
+    }
+  }
+`;
 
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -100,7 +116,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
     <Wrapper isOwner={isOwner}>
       {editing ? (
         <>
-          <form onSubmit={onSubmit}>
+          <EditForm onSubmit={onSubmit}>
             <input
               type="text"
               placeholder="Edit your nweet"
@@ -109,7 +125,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
               onChange={onChange}
             />
             <input type="submit" value="NWEET" />
-          </form>
+          </EditForm>
           <button onClick={toggleEditing}>Cancel</button>
         </>
       ) : (
